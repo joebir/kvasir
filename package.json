@@ -1,0 +1,31 @@
+{
+  "name": "kvasir",
+  "version": "1.0.0",
+  "description": "A Discord dicebot for use with the Ironsworn roleplaying game",
+  "main": "app.js",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joebir/kvasir.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "dicebot",
+    "ironsworn"
+  ],
+  "author": "\"Joe Bir\"",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joebir/kvasir/issues"
+  },
+  "homepage": "https://github.com/joebir/kvasir#readme"
+}
