@@ -36,7 +36,7 @@ client.on('message', msg => {
     const args = msg.content.slice(2).trim().split(/ +/);
 
     // TODO: implement further functionality here, but dice rolling first
-    const actionDieBonus = parseInt(messageWordArr[1]);
+    const actionDieBonus = parseInt(args[0]);
     if (isNaN(actionDieBonus)) return;
     takeAction(actionDieBonus, msg);
 });
