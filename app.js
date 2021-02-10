@@ -26,11 +26,16 @@ assetLookup = (searchTerm, msg) => {
         msg.channel.send(`Sorry ${msg.author}, I could not find anything matching "${searchTerm}".`)
     } else {
         let content = `${msg.author}\n***${asset.name}***\n*${asset.type}*\n`;
-        if(asset.info) content += `${asset.info}\n`;
+        if (asset.info) content += `${asset.info}\n`;
         content += `${asset.point1}\n${asset.point2}\n${asset.point3}`;
-        if(asset.health) content += `\nHealth: ${asset.health}`;
+        if (asset.health) content += `\nHealth: ${asset.health}`;
         msg.channel.send(content);
     }
+}
+
+oracle = (args, msg) => {
+    const num = rando(1, 100);
+    msg.reply(`the magic number is ${num}.`);
 }
 
 takeAction = (actionDieBonus, msg) => {
@@ -50,11 +55,14 @@ client.on('message', msg => {
     if (args[0].toLowerCase() === "asset") {
         if (args.length === 1) return;
         assetLookup(args[1], msg);
+    } else if (args[0].toLowerCase() === "oracle") {
+        oracle(args, msg);
+    } // TODO: implement further functionality here
+    else {
+        const actionDieBonus = parseInt(args[0]);
+        if (isNaN(actionDieBonus)) return;
+        takeAction(actionDieBonus, msg);
     }
-    // TODO: implement further functionality here
-    const actionDieBonus = parseInt(args[0]);
-    if (isNaN(actionDieBonus)) return;
-    takeAction(actionDieBonus, msg);
 });
 
 client.login(process.env.BOT_TOKEN);
