@@ -4,6 +4,7 @@
   "description": "A Discord dicebot for use with the Ironsworn roleplaying game",
   "main": "app.js",
   "dependencies": {
+    "@nastyox/rando.js": "^2.0.5",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.7"
