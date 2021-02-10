@@ -9,7 +9,7 @@ Kvasir rolls your Action Die and Challenge Dice, does some math, then sends a me
 ### !k oracle
 Kvasir rolls a d100 for you.
 ### !k asset [search term]
-Kvasir looks for the first asset with a name with a name that matches your search term. At this time Kvasir doesn't like reading more than one word.
+Kvasir looks for the first asset with a name that matches your search term. At this time Kvasir doesn't like reading more than one word.
 
 ## Packages Used
 * [Node.js](https://nodejs.org/)
