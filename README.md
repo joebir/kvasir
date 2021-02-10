@@ -16,3 +16,6 @@ Kvasir looks for the first asset with a name with a name that matches your searc
 * [discord.js](https://discord.js.org/)
 * [Dotenv](https://github.com/motdotla/dotenv)
 * [Rando.js](https://randojs.com/)
+
+## Licenses
+This work is based on [Ironsworn](ironswornrpg.com), created by Shawn Tomkin, and licensed for our use under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license](creativecommons.org/licenses/by-nc-sa/4.0/).
