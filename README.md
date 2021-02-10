@@ -6,6 +6,10 @@ Development is ongoing, this version is much more a proof of concept than a full
 ## Commands
 ### !k [number]
 Kvasir rolls your Action Die and Challenge Dice, does some math, then sends a message back. It tags the user who sent the command along with all of the dice results and the outcome of the roll.
+### !k oracle
+Kvasir rolls a d100 for you.
+### !k asset [search term]
+Kvasir looks for the first asset with a name with a name that matches your search term. At this time Kvasir doesn't like reading more than one word.
 
 ## Packages Used
 * [Node.js](https://nodejs.org/)
