@@ -35,7 +35,8 @@ assetLookup = (searchTerm, msg) => {
     }
 }
 
-moveLookup = (searchTerm, msg) => {
+moveLookup = (args, msg) => {
+    const searchTerm = args[1];
     const move = moveData.find(e => e.name.toLowerCase().replace(/\s/g, "")
         .includes(searchTerm.toLowerCase()));
     if (typeof move === 'undefined') {
@@ -45,6 +46,10 @@ moveLookup = (searchTerm, msg) => {
         if(move.progress) content += '*Progress Move*\n';
         content += move.text;
         msg.channel.send(content);
+    }
+    
+    if(args.length > 2) {
+        takeAction(args[2], msg);
     }
 }
 
@@ -58,6 +63,7 @@ searchFail = (searchTerm, msg) => {
 }
 
 takeAction = (actionDieBonus, msg) => {
+    if (isNaN(actionDieBonus)) return;
     const a = new action(actionDieBonus);
     const content = `${msg.author}\`\`\`Action Die: ${a.actionDie}\nChallenge Dice: ${a.challengeDie1}, ${a.challengeDie2}\`\`\`${a.getOutcome()}`;
     msg.channel.send(content);
@@ -70,6 +76,7 @@ client.on('ready', () => {
 client.on('message', msg => {
     if (!msg.content.toLowerCase().startsWith(process.env.PREFIX) || msg.author.bot) return;
     const args = msg.content.slice(process.env.PREFIX.length).trim().split(/ +/);
+    if(args.length === 0) return;
 
     if (args[0].toLowerCase() === "asset") {
         if (args.length === 1) return;
@@ -77,11 +84,10 @@ client.on('message', msg => {
     } else if (args[0].toLowerCase() === "oracle") {
         oracle(msg);
     } else if (args[0].toLowerCase() === "move") {
-        moveLookup(args[1], msg);
-    } // TODO: implement further functionality here
-    else {
+        if (args.length === 1) return;
+        moveLookup(args, msg);
+    } else {
         const actionDieBonus = parseInt(args[0]);
-        if (isNaN(actionDieBonus)) return;
         takeAction(actionDieBonus, msg);
     }
 });
