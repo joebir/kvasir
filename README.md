@@ -8,8 +8,12 @@ Development is ongoing, this version is much more a proof of concept than a full
 Kvasir rolls your Action Die and Challenge Dice, does some math, then sends a message back. It tags the user who sent the command along with all of the dice results and the outcome of the roll.
 ### !k oracle
 Kvasir rolls a d100 for you.
+### !k move [search term] [number?]
+Kvasir looks for the first move with a name that matches your search term. Removing spaces in the search term will not cause any problems; "Endure Stress" will return the Endure Harm move, since I've stored the Endure Harm move before the Endure Stress move, but "endurestress" will return Endure Stress. Be sure to be specific for the best results.
+
+The optional argument duplicates the functionality of the basic !k [number] command once the move has been returned.
 ### !k asset [search term]
-Kvasir looks for the first asset with a name that matches your search term. At this time Kvasir doesn't like reading more than one word.
+Kvasir looks for the first asset with a name that matches your search term. Removing spaces in the search term will not cause any problems; "Young Wyvern" will return the Young Wyvern asset, but that's because it has "Young" in the title. "youngwyvern" will also return the Young Wyvern asset, but you'll be sure that's what you're getting.
 
 ## Packages Used
 * [Node.js](https://nodejs.org/)
