@@ -3,6 +3,7 @@ const client = new Discord.Client();
 const {rando, randoSequence} = require('@nastyox/rando.js');
 require('dotenv').config();
 const assetData = require('./data/assets.json');
+const moveData = require('./data/moves.json');
 
 class action {
     constructor(actionDieBonus) {
@@ -21,11 +22,12 @@ class action {
 }
 
 assetLookup = (searchTerm, msg) => {
-    const asset = assetData.find(e => e.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    const asset = assetData.find(e => e.name.toLowerCase().replace(/\s/g, "")
+    .includes(searchTerm.toLowerCase()));
     if (typeof asset === 'undefined') {
-        msg.channel.send(`Sorry ${msg.author}, I could not find anything matching "${searchTerm}".`)
+        searchFail(searchTerm, msg);
     } else {
-        let content = `${msg.author}\n***${asset.name}***\n*${asset.type}*\n`;
+        let content = `${msg.author}\n__***${asset.name}***__\n*${asset.type}*\n`;
         if (asset.info) content += `${asset.info}\n`;
         content += `${asset.point1}\n${asset.point2}\n${asset.point3}`;
         if (asset.health) content += `\nHealth: ${asset.health}`;
@@ -33,9 +35,26 @@ assetLookup = (searchTerm, msg) => {
     }
 }
 
-oracle = (args, msg) => {
+moveLookup = (searchTerm, msg) => {
+    const move = moveData.find(e => e.name.toLowerCase().replace(/\s/g, "")
+        .includes(searchTerm.toLowerCase()));
+    if (typeof move === 'undefined') {
+        searchFail(searchTerm, msg);
+    } else {
+        let content = `${msg.author}\n__***${move.name}***__\n*${move.type}*\n`;
+        if(move.progress) content += '*Progress Move*\n';
+        content += move.text;
+        msg.channel.send(content);
+    }
+}
+
+oracle = (msg) => {
     const num = rando(1, 100);
     msg.reply(`the magic number is ${num}.`);
+}
+
+searchFail = (searchTerm, msg) => {
+    msg.channel.send(`Sorry ${msg.author}, I could not find anything matching "${searchTerm}".`)
 }
 
 takeAction = (actionDieBonus, msg) => {
@@ -56,7 +75,9 @@ client.on('message', msg => {
         if (args.length === 1) return;
         assetLookup(args[1], msg);
     } else if (args[0].toLowerCase() === "oracle") {
-        oracle(args, msg);
+        oracle(msg);
+    } else if (args[0].toLowerCase() === "move") {
+        moveLookup(args[1], msg);
     } // TODO: implement further functionality here
     else {
         const actionDieBonus = parseInt(args[0]);
